@@ -2,3 +2,7 @@
 	path = libs/glfw
 	url = git@github.com:glfw/glfw.git
 	branch = 3.3-stable
+[submodule "libs/glew"]
+	path = libs/glew
+	url = git@github.com:furkantokac/glew-release.git
+	branch = v2.1.0
