@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 project(OpenglDevTemplate)
 
-set(PROJ_SRC main.cpp)
 set(PROJ_LINK_LIBS)
+set(PROJ_SRC)
+
+# Add all files/folders under src folder automatically to the project
+file(GLOB_RECURSE PROJ_SRC src *.cpp *.h)
 
 ###
 ### Compiler settings
