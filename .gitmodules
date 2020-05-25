@@ -4,5 +4,9 @@
 	branch = 3.3-stable
 [submodule "libs/glew"]
 	path = libs/glew
-	url = git@github.com:furkantokac/glew-release.git
+	url = git@github.com:furkantokac/glew.git
 	branch = v2.1.0
+[submodule "libs/freeglut"]
+	path = libs/freeglut
+	url = git@github.com:furkantokac/freeglut.git
+	branch = 3.2.1
