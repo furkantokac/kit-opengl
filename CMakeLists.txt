@@ -6,15 +6,16 @@ project(OpenglDevTemplate)
 ### Options
 ###
 # Unsed previous parameters from cache for the sake of dynamism
-unset(OPT_SUPPORT_GLFW CACHE)
-unset(OPT_SUPPORT_GLAD CACHE)
-unset(OPT_SUPPORT_GLEW CACHE)
-unset(OPT_SUPPORT_FREEGLUT CACHE)
+unset(KITGL_SUPPORT_GLFW CACHE)
+unset(KITGL_SUPPORT_GLAD CACHE)
+unset(KITGL_SUPPORT_GLEW CACHE)
+unset(KITGL_SUPPORT_FREEGLUT CACHE)
 
-option(OPT_SUPPORT_GLFW "Set ON/OFF to enable/disable GLFW support." ON)
-option(OPT_SUPPORT_GLAD "Set ON/OFF to enable/disable GLAD support." ON)
-option(OPT_SUPPORT_GLEW "Set ON/OFF to enable/disable GLEW support." ON)
-option(OPT_SUPPORT_FREEGLUT "Set ON/OFF to enable/disable FreeGLUT support." ON)
+# Enable desired libs
+option(KITGL_SUPPORT_GLFW "Set ON/OFF to enable/disable GLFW support." ON)
+option(KITGL_SUPPORT_GLAD "Set ON/OFF to enable/disable GLAD support." ON)
+option(KITGL_SUPPORT_GLEW "Set ON/OFF to enable/disable GLEW support." ON)
+option(KITGL_SUPPORT_FREEGLUT "Set ON/OFF to enable/disable FreeGLUT support." ON)
 
 
 ###
@@ -39,44 +40,54 @@ add_definitions(
 ###
 ### GLFW
 ###
-if(OPT_SUPPORT_GLFW)
+if(KITGL_SUPPORT_GLFW)
+    # Disable internal builds
+    option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
+    option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
+    option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
+
     add_subdirectory(libs/glfw)
     include_directories(libs/glfw/include)
     include_directories(libs/glfw/deps)
     list(APPEND PROJ_LINK_LIBS glfw)
-endif(OPT_SUPPORT_GLFW)
+endif(KITGL_SUPPORT_GLFW)
 
 
 ###
 ### GLAD
 ###
-if(OPT_SUPPORT_GLAD)
+if(KITGL_SUPPORT_GLAD)
     include_directories(libs/glfw/deps)
     list(APPEND PROJ_SRC
         libs/glfw/deps/glad_gl.c
         )
-endif(OPT_SUPPORT_GLAD)
+endif(KITGL_SUPPORT_GLAD)
 
 
 ###
 ### GLEW
 ###
-if(OPT_SUPPORT_GLEW)
+if(KITGL_SUPPORT_GLEW)
+    # Disable internal builds
+    option (BUILD_UTILS "utilities" OFF)
+
     add_subdirectory(libs/glew/build/cmake)
     include_directories(libs/glew/include)
     list(APPEND PROJ_LINK_LIBS glew)
-endif(OPT_SUPPORT_GLEW)
+endif(KITGL_SUPPORT_GLEW)
 
 
 ###
 ### FreeGLUT
 ###
-if(OPT_SUPPORT_FREEGLUT)
-    set(FREEGLUT_BUILD_DEMOS OFF)
+if(KITGL_SUPPORT_FREEGLUT)
+    # Disable internal builds
+    option(FREEGLUT_BUILD_DEMOS "Build FreeGLUT demos." OFF)
+
     add_subdirectory(libs/freeglut)
     include_directories(libs/freeglut/include)
     list(APPEND PROJ_LINK_LIBS freeglut)
-endif(OPT_SUPPORT_FREEGLUT)
+endif(KITGL_SUPPORT_FREEGLUT)
 
 
 ###
