@@ -42,6 +42,9 @@ add_definitions(
 ###
 if(KITGL_SUPPORT_GLFW)
     # Disable internal builds
+    unset(GLFW_BUILD_EXAMPLES CACHE)
+    unset(GLFW_BUILD_TESTS CACHE)
+    unset(GLFW_BUILD_DOCS CACHE)
     option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
     option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
     option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
@@ -69,7 +72,8 @@ endif(KITGL_SUPPORT_GLAD)
 ###
 if(KITGL_SUPPORT_GLEW)
     # Disable internal builds
-    option (BUILD_UTILS "utilities" OFF)
+    unset(BUILD_UTILS CACHE)
+    option(BUILD_UTILS "utilities" OFF)
 
     add_subdirectory(libs/glew/build/cmake)
     include_directories(libs/glew/include)
@@ -82,6 +86,7 @@ endif(KITGL_SUPPORT_GLEW)
 ###
 if(KITGL_SUPPORT_FREEGLUT)
     # Disable internal builds
+    unset(FREEGLUT_BUILD_DEMOS CACHE)
     option(FREEGLUT_BUILD_DEMOS "Build FreeGLUT demos." OFF)
 
     add_subdirectory(libs/freeglut)
